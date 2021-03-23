@@ -2,26 +2,21 @@
 
 //const prompt = require("prompt-sync")({ sigint: true });
 
-const a = "Apple";
-const b = "Banana";
-const m = "Mango";
-const d = "Diamond";
-const l = "Lychee";
-const k = "Kiwi";
-const s = "Strawberry";
 
-const reel1 = [a, b, m, d, a, b, m, d, l, b, k, s];
-const reel2 = [a, d, m, b, b, m, a, b, l, m, k, s];
-const reel3 = [m, b, m, a, a, b, d, l, m, b, k, s];
+
+const reel1 = ["🍇", "🍈", "🍉", "🍊", "🍋", "🍌", "🍍", "🥭", "🍎", "🍏", "🍐", "🍑", "🍒", "🍓"];
+const reel2 = ["🍇", "🍈", "🍉", "🍊", "🍋", "🍌", "🍍", "🥭", "🍎", "🍏", "🍐", "🍑", "🍒", "🍓"];
+const reel3 = ["🍇", "🍈", "🍉", "🍊", "🍋", "🍌", "🍍", "🥭", "🍎", "🍏", "🍐", "🍑", "🍒", "🍓"];
 
 let money = 100;
 
 
+
 //While there is money, go round. In this instance, 100 times.
-function spinReels (){
+function spinReels() {
 
 
-//while (money) {
+  //while (money) {
   console.log("You have £" + money);
   prompt("Press enter to spin the wheels");
 
@@ -59,14 +54,42 @@ function makeRandomNumber(max) {
   return Math.floor(Math.random() * max);
 }
 
-let v=0
+let v = 0
 
-function scrollUp(){
+function startReels() {
+  requestAnimationFrame(scrollUp)
+}
 
-  let a = document.getElementsByClassName("window")
-  a[0].scrollTop=v
-  v+=10
-  
+
+
+let r = document.getElementsByClassName("reelWindow")
+
+reel1.forEach(f => r[0].innerHTML += f)
+reel2.forEach(f => r[1].innerHTML += f)
+reel3.forEach(f => r[2].innerHTML += f)
+
+
+const reelHeight = r[0].scrollHeight
+
+r[0].innerHTML += '🍇 🍈 🍉'
+r[1].innerHTML += '🍇 🍈 🍉'
+r[2].innerHTML += '🍇 🍈 🍉'
+
+function scrollUp() {
+
+  let a = document.getElementsByClassName("reelWindow")
+
+  a[0].scrollTop = v
+  a[1].scrollTop = v
+  a[2].scrollTop = v
+  v += 9
+
+  if (v > reelHeight) {
+    v = 0
+  }
+
+  requestAnimationFrame(scrollUp)
+
 }
 
 
